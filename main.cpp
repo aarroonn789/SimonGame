@@ -128,12 +128,14 @@ void drawScreen(char color) {
             cout << "|           |           |" << endl;
             cout << "+-----------+-----------+" << endl;
             break;
+        default:
+            cout << "ERROR: Unknown Color: " << color << endl;
     }
 }
 
-void drawSequence(char simonSequence[], int difficulty) {
-    for (int i = 0; i < 6; i++) {
-        drawScreen(simonSequence[i]);
+void drawSequence(const string& simonSequence, int difficulty) {
+    for (char color : simonSequence) {
+        drawScreen(color);
         usleep(difficulty);
         system("tput clear");
         drawScreen('C');
@@ -196,30 +198,56 @@ char generateRandomColor() {
             return 'Y';
         case 3:
             return 'B';
+        default:
+            cout << "ERROR: Unexpected color-number: " << number << endl;
+    }
+}
+
+void generateSimonSequence(string &simonSequence, int numberOfColors) {
+    simonSequence = "";
+    for (int i = 0; i < numberOfColors; ++i) {
+        simonSequence += generateRandomColor();
     }
 }
 
 string getGuessString() {
-    string guess = "";
+    string guess;
     cout << "Enter the sequence: ";
     cin >> guess;
     return guess;
 }
 
+bool isGuessCorrect(const string& simonSequence, const string& guessSequence) {
+    return simonSequence == guessSequence;
+}
 
 
 int main()
 {
-    int difficulty;
-    srand(time(NULL));
+    int difficulty = 0;
+    int score = 0;
+    int round = 0;
+    bool keepGuessing = true;
+    string guessSequence;
+    string simonSequence;
+    mainMenu();
+    difficulty = getDifficulty();
 
-    //mainMenu();
 
-    //difficulty = getDifficulty();
+    while(keepGuessing) {
+        score += round;
+        round += 1;
 
-    //char simSeq[] = { 'B','G','R','Y','B','B'};
-    //cout << "Testing sequence: RRYG" << endl;
-    //drawSequence(simSeq, difficulty);
+        generateSimonSequence(simonSequence, round);
+        drawSequence(simonSequence, difficulty);
+        guessSequence = getGuessString();
+
+        keepGuessing = isGuessCorrect(simonSequence, guessSequence);
+    }
+
+    cout << endl << endl << "You lost!" << endl;
+    cout << "    Score: " << score << endl;
+    cout << "    Rounds: " << round - 1 << endl;
 
     return 0;
 }
