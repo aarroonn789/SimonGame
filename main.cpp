@@ -172,15 +172,12 @@ int getDifficulty() {
         case 'E':
             cout << "Easy mode selected." << endl;
             return 1000000;
-            break;
         case 'M':
             cout << "Medium mode selected." << endl;
             return 500000;
-            break;
         case 'H':
             cout << "Hard mode selected." << endl;
             return 250000;
-            break;
         default:
             cout << "Somehow you managed to fail this task. Hopefully easy mode is easy enough for you." << endl;
             return 1000000;
