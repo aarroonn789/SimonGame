@@ -222,27 +222,35 @@ bool isGuessCorrect(const string& simonSequence, const string& guessSequence) {
 
 int main()
 {
-    int difficulty = 0;
-    int score = 0;
-    int round = 0;
+    //Define variables
+    int difficulty = 0, score = 0, round = 0;
     bool keepGuessing = true;
-    string guessSequence;
-    string simonSequence;
+    string guessSequence, simonSequence;
+
+    //Draw main menu
     mainMenu();
+
+    //Get difficulty
     difficulty = getDifficulty();
 
-
+    //Enter game loop
     while(keepGuessing) {
+        //Increment score and round
         score += round;
         round += 1;
 
+        //Generate and display simonSequence
         generateSimonSequence(simonSequence, round);
         drawSequence(simonSequence, difficulty);
+
+        //Get user guess
         guessSequence = getGuessString();
 
+        //Check if guess is correct and update keepGuessing
         keepGuessing = isGuessCorrect(simonSequence, guessSequence);
     }
 
+    //Display score
     cout << endl << endl << "You lost!" << endl;
     cout << "    Score: " << score << endl;
     cout << "    Rounds: " << round - 1 << endl;
