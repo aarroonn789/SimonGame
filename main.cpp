@@ -8,7 +8,7 @@
 #include <iostream>
 #include <unistd.h>
 #include <stdlib.h>
-#include <time.h>
+#include <ctime>
 
 using namespace std;
 
@@ -201,12 +201,12 @@ char generateRandomColor() {
     }
 }
 
-void generateSimonSequence(string &simonSequence, int numberOfColors) {
-    simonSequence = "";
-    for (int i = 0; i < numberOfColors; ++i) {
-        simonSequence += generateRandomColor();
-    }
-}
+//void generateSimonSequence(string &simonSequence, int numberOfColors) {
+//    simonSequence = "";
+//    for (int i = 0; i < numberOfColors; ++i) {
+//        simonSequence += generateRandomColor();
+//    }
+//}
 
 string getGuessString() {
     string guess;
@@ -227,6 +227,9 @@ int main()
     bool keepGuessing = true;
     string guessSequence, simonSequence;
 
+    //Seed random
+    srand(time(NULL));
+
     //Draw main menu
     mainMenu();
 
@@ -239,8 +242,8 @@ int main()
         score += round;
         round += 1;
 
-        //Generate and display simonSequence
-        generateSimonSequence(simonSequence, round);
+        //Add character to and display simonSequence
+        simonSequence += generateRandomColor();
         drawSequence(simonSequence, difficulty);
 
         //Get user guess
