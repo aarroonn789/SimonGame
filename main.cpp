@@ -134,6 +134,7 @@ void drawScreen(char color) {
 }
 
 void drawSequence(const string& simonSequence, int difficulty) {
+    system("tput clear");
     for (int i = 0; i < simonSequence.length(); i++) {
         drawScreen(simonSequence[i]);
         usleep(difficulty);
