@@ -180,7 +180,7 @@ int getDifficulty() {
             cout << "Hard mode selected." << endl;
             return 250000;
         default:
-            cout << "Somehow you managed to fail this task. Hopefully easy mode is easy enough for you." << endl;
+            cout << "Hopefully easy mode is easy enough for you." << endl;
             return 1000000;
     }
 }
