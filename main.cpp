@@ -140,6 +140,7 @@ void drawSequence(const string& simonSequence, int difficulty) {
         usleep(difficulty);
         system("tput clear");
         drawScreen('C');
+        usleep(difficulty/10);
         system("tput clear");
     }
 }
@@ -235,6 +236,8 @@ int main()
 
     //Get difficulty
     difficulty = getDifficulty();
+    cout << "Get Ready!";
+    usleep(1000000);
 
     //Enter game loop
     while(keepGuessing) {
